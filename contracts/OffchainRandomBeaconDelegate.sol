@@ -28,7 +28,8 @@ contract OffchainRandomBeaconDelegate is Initializable, AccessControl, OffchainR
 
     function beaconRandom(address user, uint id, uint seed) external {
         require(hasRole(ROBOT_ROLE, msg.sender), "No access");
-        uint randomSeed = uint(keccak256(abi.encode(user, id, blockhash(block.number - 1), block.coinbase, seed)));
+        uint randomSeed = uint(keccak256(abi.encode(user, id, blockhash(block.number - 1), block.coinbase, seed, nonces[user])));
+        nonces[user]++;
         Receiver(user).inputSeed(randomSeed, id);
     }
 }

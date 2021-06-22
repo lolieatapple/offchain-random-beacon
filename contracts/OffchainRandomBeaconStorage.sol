@@ -6,8 +6,6 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 contract OffchainRandomBeaconStorage {
     using SafeMath for uint256;
 
-    struct RequireInfo {
-        address from;
-        uint id;
-    }
+    // user => call this sc nonce
+    mapping(address => uint) public nonces;
 }
